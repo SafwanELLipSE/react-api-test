@@ -2,12 +2,18 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Row, Container, Col } from 'react-bootstrap';
 import {useParams} from 'react-router-dom';
+import { urlEpisode } from "../../action";
+import { useDispatch, useSelector } from "react-redux";
 
 const IndividualEpisode = () => {
     const [episode, setEpisode] = useState(0);
     const {id} = useParams();
+    const eUrl = useSelector(c => c.episodeUrl);
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        const url = `https://rickandmortyapi.com/api/episode/${id}`;
+        dispatch(urlEpisode())
+        const url = eUrl.url+id;
         fetch(url)
         .then(res => res.json())
         .then(

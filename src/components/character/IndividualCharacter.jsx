@@ -2,12 +2,18 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Row, Container, Col } from 'react-bootstrap';
 import {useParams} from 'react-router-dom';
+import { urlCharacter } from "../../action";
+import { useDispatch, useSelector } from "react-redux";
+
 const Individualcharacter = () => {
     const [user, setUser] = useState(0);
     const {id} = useParams();
+    const cUrl = useSelector(c => c.characterUrl);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const url = `https://rickandmortyapi.com/api/character/${id}`;
+        dispatch(urlCharacter())
+        const url = cUrl.url+id;
         fetch(url)
         .then(res => res.json())
         .then(

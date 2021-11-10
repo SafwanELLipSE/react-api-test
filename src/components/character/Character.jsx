@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card } from 'react-bootstrap';
 import Paginate from "./Paginate";
 import { Link } from 'react-router-dom';
+import Fetchcharacter from "./FetchCharacter"; 
 
 class character extends Component {
     state = {
@@ -16,7 +17,6 @@ class character extends Component {
         .then(res => res.json())
         .then(
             (result) => {
-                // console.log(result);
                 this.setState(()=>({
                     data: result.results,
                     page: result.info,
@@ -40,6 +40,7 @@ class character extends Component {
         const {data, page} = this.state;
         return <div className="container">
             <h1>All Characters ({this.state.page.count})</h1>
+            {/* <Fetchcharacter data={data} page={page}/> */}
             <div className="row mt-2">
             {
                 data.map(data => (
